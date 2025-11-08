@@ -1,0 +1,13 @@
+provider "aws" {
+    region = "ap-south-1"
+  
+}
+
+resource "aws_s3_bucket" "sravankumar_bucket" {
+    bucket = "sravan-demo-bucket-${terraform.workspace}"
+
+    tags = {
+      environment = terraform.workspace
+    }
+  
+}
