@@ -11,3 +11,41 @@ resource "aws_s3_bucket" "sravankumar_bucket" {
     }
   
 }
+
+---------------------------------------------------------------------------------------
+🧠 What is a Terraform Workspace?
+
+A Terraform workspace is an isolated environment that allows you to manage multiple instances of the same Terraform configuration with separate state files.
+
+Each workspace keeps its own Terraform state, which defines what resources have been created, updated, or destroyed.
+This means you can reuse the same Terraform code to manage different environments — such as development, testing, and production — without interfering with each other’s resources.
+
+🧩 Key Concepts
+Single Configuration, Multiple States
+A workspace lets you use one set of Terraform files to deploy separate environments.
+Each workspace has its own state file, so changes in one environment don’t affect another.
+
+State Isolation
+Terraform uses a state file (terraform.tfstate) to track the real-world infrastructure it manages.
+When you switch workspaces, Terraform automatically switches to the state file belonging to that workspace.
+
+Default Workspace
+When you initialize a new Terraform project, a default workspace is automatically created.
+Unless you explicitly create or switch to another workspace, all operations occur in the default one.
+
+Naming and Organization
+Workspaces are typically named to represent environments (for example: dev, staging, prod).
+Terraform references the active workspace name internally through the built-in variable terraform.workspace.
+
+Use Case
+Workspaces help teams avoid maintaining multiple copies of the same configuration for different environments.
+They provide a clean and safe way to manage environment-specific resources while maintaining consistent infrastructure definitions.
+
+State Storage
+In a local backend, Terraform stores each workspace’s state in a subdirectory inside .terraform/terraform.tfstate.d/.
+In a remote backend (like S3, Azure Storage, etc.), Terraform manages workspace states separately within that backend.
+
+Limitations
+Workspaces isolate state, not configuration — meaning you can’t have different variable defaults or settings per workspace unless you define them explicitly.
+
+They are best suited for small, environment-level separation, not for managing entirely different infrastructures.
